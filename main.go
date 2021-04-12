@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"net/http"
 )
 
@@ -105,9 +106,9 @@ func main() {
 	// parse all flags set in `init`
 	flag.Parse()
 
-	fmt.Printf("\nStarting Proxy ByPass-Cors Server at port(:%v)...\n\n", PORT)
+	fmt.Printf("\nStarting Proxy ByPass-Cors Server at port(:%v)...\n\n", os.Getenv("PORT"))
 
-	if err := http.ListenAndServe(":"+PORT, License(&handler{})); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("PORT"), License(&handler{})); err != nil {
 		log.Println("\n\nPanics", err)
 	}
 }
